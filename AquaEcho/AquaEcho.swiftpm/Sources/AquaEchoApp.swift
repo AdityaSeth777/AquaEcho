@@ -1,5 +1,4 @@
 import SwiftUI
-import AuthenticationServices
 
 @main
 struct AquaEchoApp: App {
@@ -13,7 +12,7 @@ struct AquaEchoApp: App {
     var body: some Scene {
         WindowGroup {
             if authManager.isAuthenticated {
-                ContentView()
+                MainTabView()
                     .environmentObject(motionManager)
                     .environmentObject(audioFeedback)
                     .environmentObject(hapticFeedback)
@@ -31,14 +30,7 @@ struct AquaEchoApp: App {
     }
 }
 
-struct ContentView: View {
-    @EnvironmentObject var motionManager: MotionManager
-    @EnvironmentObject var audioFeedback: AudioFeedback
-    @EnvironmentObject var hapticFeedback: HapticFeedback
-    @EnvironmentObject var healthKitManager: HealthKitManager
-    @EnvironmentObject var authManager: AuthenticationManager
-    @EnvironmentObject var settingsManager: SettingsManager
-    
+struct MainTabView: View {
     var body: some View {
         TabView {
             SwimView()
@@ -61,6 +53,5 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
-        .accentColor(.blue)
     }
 }

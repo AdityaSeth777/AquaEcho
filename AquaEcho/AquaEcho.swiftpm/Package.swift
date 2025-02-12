@@ -1,14 +1,28 @@
-// swift-tools-version: 6.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
-    name: "AquaEcho.swiftpm",
+    name: "AquaEcho",
+    platforms: [
+        .iOS(.v16),
+        .macOS(.v13)
+    ],
+    products: [
+        .application(
+            name: "AquaEcho",
+            targets: ["AquaEcho"]
+        )
+    ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-charts.git", from: "0.1.0")
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .executableTarget(
-            name: "AquaEcho.swiftpm"),
+        .target(
+            name: "AquaEcho",
+            dependencies: [
+                .product(name: "Charts", package: "swift-charts")
+            ],
+            path: "Sources"
+        )
     ]
 )
