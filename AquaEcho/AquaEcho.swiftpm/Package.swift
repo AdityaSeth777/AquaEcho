@@ -8,7 +8,7 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
-        .application(
+        .executable(
             name: "AquaEcho",
             targets: ["AquaEcho"]
         )
@@ -17,7 +17,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-charts.git", from: "0.1.0")
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "AquaEcho",
             dependencies: [
                 .product(name: "Charts", package: "swift-charts")
