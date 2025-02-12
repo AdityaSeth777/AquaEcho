@@ -1,128 +1,154 @@
-# AquaEcho
+# AquaEcho - Smart Swimming Assistant
 
-AquaEcho is a revolutionary sound-based navigation system designed to assist visually impaired and competitive swimmers with real-time lane guidance using haptic feedback (Apple Watch) and spatial audio cues (AirPods).
+AquaEcho is a revolutionary iOS application designed to assist visually impaired and competitive swimmers with real-time lane guidance using haptic feedback and spatial audio cues.
 
-## Features
+## 🚀 Getting Started
 
-- 🏊‍♂️ Real-time lane position tracking using CoreMotion
-- 🎧 Spatial audio feedback via AirPods
-- ⌚️ Haptic feedback through Apple Watch
-- 🤖 AI-powered lap detection
-- ❤️ HealthKit integration for swim analytics
-- 📊 Detailed swimming statistics and progress tracking
-- 🎯 Goal setting and achievement system
-- 🔐 Secure authentication with Sign in with Apple
-- 🌙 Dark mode support
-- 🔄 Automatic session syncing
+### Prerequisites
 
-## Requirements
+- Xcode 15.0 or later
+- iOS 16.0 or later
+- macOS Ventura or later
+- Apple Developer Account (for testing on physical devices and App Store deployment)
 
-- iOS 16.0+
-- watchOS 9.0+
-- Xcode 14.0+
-- Swift 5.7+
-- AirPods Pro (recommended for spatial audio)
-- Apple Watch Series 4 or later
-
-## Installation
-
-### Development Setup
+### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/aquaecho.git
+   git clone https://github.com/AdityaSeth777/AquaEcho.git
    ```
 
-2. Open the project in Xcode:
-   ```bash
-   cd aquaecho
-   open AquaEcho.swiftpm
-   ```
+2. Open the project:
+   - Navigate to the project directory
+   - Double-click `AquaEcho.swiftpm` or open it through Xcode
+   - Alternatively, use `xed .` in the terminal from the project directory
 
-3. Configure signing capabilities in Xcode:
-   - Select the project in the navigator
-   - Select the target
-   - Go to the Signing & Capabilities tab
-   - Add your development team
+3. Configure Development Team:
+   - In Xcode, select the project in the navigator
+   - Select the AquaEcho target
+   - Under Signing & Capabilities:
+     - Select your development team
+     - Bundle identifier will be automatically updated
 
-4. Install development dependencies:
-   - Xcode Command Line Tools
-   - Swift Package Manager dependencies will be installed automatically
+4. Build and Run:
+   - Select your target device (iOS 16.0+ required)
+   - Click the Run button (⌘R) or select Product > Run
 
-### Running the Project
+### Required Device Capabilities
 
-1. Select your target device (iPhone or Simulator)
-2. Build and run the project (⌘R)
-3. Grant required permissions when prompted:
-   - HealthKit access
-   - Motion & Fitness access
-   - Notification permissions
+- iPhone with iOS 16.0+
+- Apple Watch (optional, for haptic feedback)
+- AirPods Pro/Max (recommended for spatial audio)
 
-## Usage
+## 🛠 Development Setup
 
-1. **Initial Setup**
-   - Sign in with your Apple ID
-   - Complete the onboarding process
-   - Set your pool length and preferences
+### Project Structure
 
-2. **Before Swimming**
-   - Connect your AirPods
-   - Ensure your Apple Watch is paired
-   - Calibrate the system using the calibration wizard
+```
+AquaEcho.swiftpm/
+├── Package.swift           # Swift Package manifest
+├── Sources/
+│   ├── AquaEchoApp.swift  # Main app entry point
+│   ├── Views/             # SwiftUI views
+│   ├── Models/            # Data models
+│   ├── Managers/          # Business logic
+│   └── Components/        # Reusable UI components
+```
 
-3. **During Swimming**
-   - Start a new swimming session
-   - Receive real-time audio and haptic feedback
-   - System automatically tracks laps and position
+### Key Features
 
-4. **After Swimming**
-   - Review your session statistics
-   - Check your achievements
-   - View your progress in the Health app
+- 🏊‍♂️ Real-time lane position tracking
+- 🎧 Spatial audio feedback
+- ⌚️ Haptic feedback
+- 📊 Swimming analytics
+- 🔐 Sign in with Apple
+- ❤️ HealthKit integration
 
-## Architecture
+### Configuration
 
-AquaEcho follows the MVVM (Model-View-ViewModel) architecture pattern and uses SwiftUI for the user interface.
+1. **HealthKit Capabilities:**
+   - Enable HealthKit in Signing & Capabilities
+   - Add required privacy descriptions in Info.plist
 
-### Core Components
+2. **Sign in with Apple:**
+   - Enable Sign in with Apple capability
+   - Configure your Apple Developer account
 
-- **MotionManager**: Handles device motion tracking
-- **AudioFeedback**: Manages spatial audio cues
-- **HapticFeedback**: Controls Apple Watch haptics
-- **HealthKitManager**: Manages health data integration
-- **LapDetection**: Processes motion data for lap counting
-- **AuthenticationManager**: Handles user authentication
-- **SettingsManager**: Manages user preferences
+3. **Audio Session:**
+   - Background audio must be enabled
+   - Add required privacy descriptions for microphone usage
 
-## Contributing
+## 📱 Testing
+
+### Simulator Testing
+
+1. Select an iOS Simulator (iPhone 14 or newer recommended)
+2. Some features like HealthKit may have limited functionality
+3. Use the Simulator's Debug menu to simulate location and motion
+
+### Physical Device Testing
+
+1. Connect your iOS device
+2. Trust your development certificate
+3. Select your device in Xcode
+4. Build and run (⌘R)
+
+### Common Issues
+
+1. **Preview Issues:**
+   - Ensure you're using Xcode 15+
+   - Clean build folder (⇧⌘K)
+   - Delete derived data
+
+2. **Build Errors:**
+   - Update to latest Xcode
+   - Clean build folder
+   - Re-clone repository if needed
+
+3. **Runtime Errors:**
+   - Check iOS version compatibility
+   - Verify all required capabilities are enabled
+   - Check privacy descriptions in Info.plist
+
+## 📦 Deployment
+
+### TestFlight
+
+1. Configure App Store Connect
+2. Create an app record
+3. Upload build through Xcode
+4. Add test information
+5. Invite testers
+
+### App Store
+
+1. Complete App Store Connect setup
+2. Add required metadata
+3. Submit for review
+4. Monitor status in App Store Connect
+
+## 🔒 Privacy & Security
+
+- All data stored locally or in HealthKit
+- Sign in with Apple for authentication
+- No third-party analytics
+- GDPR and CCPA compliant
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-## Privacy
+## 📞 Support
 
-AquaEcho takes user privacy seriously:
-- All data is stored locally or in HealthKit
-- Authentication uses Sign in with Apple
-- No third-party analytics
-- No data sharing without explicit consent
-
-## Support
-
-For support, please:
-1. Check the [Documentation](docs/README.md)
-2. Search [Issues](https://github.com/yourusername/aquaecho/issues)
-3. Create a new issue if needed
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Apple for SwiftUI, HealthKit, and CoreMotion frameworks
-- The swimming community for valuable feedback
-- All contributors who have helped shape this project
+For support:
+1. Check documentation
+2. Open an issue
+3. Contact support@aquaecho.com

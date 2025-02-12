@@ -1,5 +1,4 @@
 import SwiftUI
-import Charts
 
 struct StatsView: View {
     @EnvironmentObject var healthKitManager: HealthKitManager
@@ -35,18 +34,6 @@ struct StatsView: View {
                         StatCard(title: "Calories", value: "450", icon: "flame.fill")
                     }
                     .padding(.horizontal)
-                    
-                    // Charts
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Distance Over Time")
-                            .font(.headline)
-                        
-                        Chart {
-                            // Implementation of distance chart
-                        }
-                        .frame(height: 200)
-                    }
-                    .padding()
                     
                     // Recent Sessions
                     RecentSessionsList()
@@ -93,11 +80,40 @@ struct RecentSessionsList: View {
                 .font(.headline)
                 .padding(.horizontal)
             
-            ForEach(healthKitManager.swimSessions) { session in
+            ForEach(healthKitManager.swimSessions, id: \.uuid) { session in
                 NavigationLink(destination: SessionDetailView(session: session)) {
                     SessionRow(session: session)
                 }
             }
         }
+    }
+}
+
+struct SessionRow: View {
+    let session: HKWorkout
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(session.startDate, style: .date)
+                    .font(.headline)
+                Text("\(Int(session.duration / 60)) minutes")
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing) {
+                if let distance = session.totalDistance?.doubleValue(for: .meter()) {
+                    Text("\(Int(distance))m")
+                        .font(.headline)
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(8)
+        .shadow(radius: 1)
+        .padding(.horizontal)
     }
 }
