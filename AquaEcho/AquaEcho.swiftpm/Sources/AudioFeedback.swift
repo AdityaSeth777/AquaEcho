@@ -4,8 +4,7 @@ import SwiftUI
 class AudioFeedback: ObservableObject {
     private var engine: AVAudioEngine?
     private var player: AVAudioPlayerNode?
-    private var leftPanner: AVAudioPanner?
-    private var rightPanner: AVAudioPanner?
+    private var stereoMixer: AVAudioMixerNode?
     
     @Published var isEnabled: Bool = true {
         didSet {
@@ -28,22 +27,21 @@ class AudioFeedback: ObservableObject {
         
         engine = AVAudioEngine()
         player = AVAudioPlayerNode()
+        stereoMixer = AVAudioMixerNode()
         
         guard let engine = engine,
-              let player = player else { return }
+              let player = player,
+              let stereoMixer = stereoMixer else { return }
         
         engine.attach(player)
+        engine.attach(stereoMixer)
         
         // Configure spatial audio settings
         let mixer = engine.mainMixerNode
         let format = mixer.outputFormat(forBus: 0)
         
-        // Create stereo panning capability
-        let pannerNode = AVAudioMixerNode()
-        engine.attach(pannerNode)
-        
-        engine.connect(player, to: pannerNode, format: format)
-        engine.connect(pannerNode, to: mixer, format: format)
+        engine.connect(player, to: stereoMixer, format: format)
+        engine.connect(stereoMixer, to: mixer, format: format)
         
         do {
             try engine.start()
@@ -55,7 +53,7 @@ class AudioFeedback: ObservableObject {
     }
     
     func playDirectionalCue(direction: Float) {
-        guard isEnabled, let player = player else { return }
+        guard isEnabled, let player = player, let stereoMixer = stereoMixer else { return }
         
         // Create directional audio cue
         let sampleRate = 44100.0

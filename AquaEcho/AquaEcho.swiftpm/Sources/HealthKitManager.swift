@@ -107,7 +107,7 @@ class HealthKitManager: ObservableObject {
         healthStore.execute(query)
     }
     
-    func calculateStats(for timeFrame: StatsView.TimeFrame) -> SwimStats {
+    func calculateStats(for timeFrame: TimeFrame) -> SwimStats {
         var stats = SwimStats()
         let calendar = Calendar.current
         let endDate = Date()
@@ -132,6 +132,12 @@ class HealthKitManager: ObservableObject {
         
         return stats
     }
+}
+
+enum TimeFrame {
+    case week
+    case month
+    case year
 }
 
 struct SwimStats {

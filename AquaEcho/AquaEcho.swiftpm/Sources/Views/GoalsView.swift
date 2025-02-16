@@ -19,7 +19,10 @@ struct GoalsView: View {
                 
                 VStack(alignment: .leading) {
                     Text("Number of Laps")
-                    Slider(value: Double(binding: $weeklyLaps), in: 20...200, step: 5) {
+                    Slider(value: Binding(
+                        get: { Double(weeklyLaps) },
+                        set: { weeklyLaps = Int($0) }
+                    ), in: 20...200, step: 5) {
                         Text("Weekly Laps Goal")
                     }
                     Text("\(weeklyLaps) laps")
@@ -48,8 +51,4 @@ struct GoalsView: View {
     }
 }
 
-extension Double {
-    init(binding: Binding<Int>) {
-        self = Double(binding.wrappedValue)
-    }
-}
+// Remove the Double extension as it's no longer needed
