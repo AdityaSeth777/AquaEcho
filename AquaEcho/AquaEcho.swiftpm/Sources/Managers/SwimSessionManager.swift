@@ -10,14 +10,32 @@ class SwimSessionManager: ObservableObject {
     
     private var startTime: Date?
     private var timer: Timer?
+    private let healthKitManager: HealthKitManager
+    private let lapDetection = LapDetection()
+    
+    init(healthKitManager: HealthKitManager = HealthKitManager()) {
+        self.healthKitManager = healthKitManager
+        
+        // Observe lap completion notifications
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleLapCompleted),
+            name: Notification.Name("LapCompleted"),
+            object: nil
+        )
+    }
     
     func startSession() {
         isSessionActive = true
         startTime = Date()
+        lapCount = 0
+        distance = 0
         
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateSessionDuration()
         }
+        
+        lapDetection.reset()
     }
     
     func endSession() {
@@ -25,13 +43,13 @@ class SwimSessionManager: ObservableObject {
         timer?.invalidate()
         timer = nil
         
-        // Save session data
         saveSession()
         
         // Reset values
         sessionDuration = 0
         lapCount = 0
         distance = 0
+        startTime = nil
     }
     
     private func updateSessionDuration() {
@@ -39,7 +57,25 @@ class SwimSessionManager: ObservableObject {
         sessionDuration = Date().timeIntervalSince(start)
     }
     
+    @objc private func handleLapCompleted() {
+        lapCount += 1
+        // Update distance based on pool length
+        let poolLength = UserDefaults.standard.integer(forKey: "poolLength")
+        distance = Double(lapCount * poolLength)
+    }
+    
     private func saveSession() {
-        // Implementation for saving session data to HealthKit
+        guard let startTime = startTime else { return }
+        
+        healthKitManager.saveSwimSession(
+            duration: sessionDuration,
+            distance: distance,
+            laps: lapCount
+        )
+    }
+    
+    deinit {
+        timer?.invalidate()
+        NotificationCenter.default.removeObserver(self)
     }
 }

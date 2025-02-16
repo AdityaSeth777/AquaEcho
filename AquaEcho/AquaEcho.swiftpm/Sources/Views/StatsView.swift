@@ -1,4 +1,5 @@
 import SwiftUI
+import HealthKit
 
 struct StatsView: View {
     @EnvironmentObject var healthKitManager: HealthKitManager
@@ -23,24 +24,68 @@ struct StatsView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
                     
-                    // Stats Cards
+                    // Stats Grid
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
                         GridItem(.flexible())
                     ], spacing: 16) {
-                        StatCard(title: "Total Distance", value: "1,500m", icon: "figure.pool.swim")
-                        StatCard(title: "Avg. Pace", value: "2:15/100m", icon: "speedometer")
-                        StatCard(title: "Total Time", value: "45:30", icon: "clock.fill")
-                        StatCard(title: "Calories", value: "450", icon: "flame.fill")
+                        let stats = healthKitManager.calculateStats(for: selectedTimeFrame)
+                        
+                        StatCard(
+                            title: "Total Distance",
+                            value: String(format: "%.0fm", stats.totalDistance),
+                            icon: "figure.pool.swim"
+                        )
+                        
+                        StatCard(
+                            title: "Avg. Pace",
+                            value: formatPace(stats.averagePace),
+                            icon: "speedometer"
+                        )
+                        
+                        StatCard(
+                            title: "Total Time",
+                            value: formatDuration(stats.totalDuration),
+                            icon: "clock.fill"
+                        )
                     }
                     .padding(.horizontal)
                     
                     // Recent Sessions
-                    RecentSessionsList()
+                    if !healthKitManager.swimSessions.isEmpty {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Recent Sessions")
+                                .font(.headline)
+                                .padding(.horizontal)
+                            
+                            ForEach(healthKitManager.swimSessions, id: \.uuid) { session in
+                                NavigationLink(destination: SessionDetailView(session: session)) {
+                                    SessionRow(session: session)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("No swimming sessions recorded yet")
+                            .foregroundColor(.secondary)
+                            .padding()
+                    }
                 }
             }
             .navigationTitle("Statistics")
+            .background(Color(.systemGroupedBackground))
         }
+    }
+    
+    private func formatPace(_ seconds: TimeInterval) -> String {
+        let minutes = Int(seconds) / 60
+        let remainingSeconds = Int(seconds) % 60
+        return String(format: "%d:%02d/100m", minutes, remainingSeconds)
+    }
+    
+    private func formatDuration(_ duration: TimeInterval) -> String {
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
@@ -68,24 +113,6 @@ struct StatCard: View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(radius: 2)
-    }
-}
-
-struct RecentSessionsList: View {
-    @EnvironmentObject var healthKitManager: HealthKitManager
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Recent Sessions")
-                .font(.headline)
-                .padding(.horizontal)
-            
-            ForEach(healthKitManager.swimSessions, id: \.uuid) { session in
-                NavigationLink(destination: SessionDetailView(session: session)) {
-                    SessionRow(session: session)
-                }
-            }
-        }
     }
 }
 

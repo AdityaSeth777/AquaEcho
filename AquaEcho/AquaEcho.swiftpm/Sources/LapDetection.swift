@@ -1,9 +1,8 @@
-import CoreML
 import CoreMotion
 
 class LapDetection: ObservableObject {
-    @Published var lapCount: Int = 0
-    @Published var isInTurn: Bool = false
+    @Published private(set) var lapCount: Int = 0
+    @Published private(set) var isInTurn: Bool = false
     
     private var motionBuffer: [CMDeviceMotion] = []
     private let bufferSize = 60 // 1 second at 60Hz
@@ -48,11 +47,13 @@ class LapDetection: ObservableObject {
             
             // Validate turn duration
             if turnDurationActual >= turnDuration {
-                lapCount += 1
-                NotificationCenter.default.post(
-                    name: Notification.Name("LapCompleted"),
-                    object: nil
-                )
+                DispatchQueue.main.async { [weak self] in
+                    self?.lapCount += 1
+                    NotificationCenter.default.post(
+                        name: Notification.Name("LapCompleted"),
+                        object: nil
+                    )
+                }
             }
             
             isInTurn = false

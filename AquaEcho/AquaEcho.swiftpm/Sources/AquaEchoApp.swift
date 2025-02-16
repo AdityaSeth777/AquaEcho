@@ -1,4 +1,5 @@
 import SwiftUI
+import HealthKit
 
 @main
 struct AquaEchoApp: App {

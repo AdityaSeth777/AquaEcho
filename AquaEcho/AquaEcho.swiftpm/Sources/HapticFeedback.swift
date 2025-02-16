@@ -1,5 +1,5 @@
 import CoreHaptics
-import UIKit
+import SwiftUI
 
 class HapticFeedback: ObservableObject {
     private var engine: CHHapticEngine?
