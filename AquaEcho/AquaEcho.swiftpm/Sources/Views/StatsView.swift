@@ -5,12 +5,6 @@ struct StatsView: View {
     @EnvironmentObject var healthKitManager: HealthKitManager
     @State private var selectedTimeFrame: TimeFrame = .week
     
-    enum TimeFrame: String, CaseIterable {
-        case week = "Week"
-        case month = "Month"
-        case year = "Year"
-    }
-    
     var body: some View {
         NavigationView {
             ScrollView {

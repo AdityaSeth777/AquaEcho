@@ -134,10 +134,10 @@ class HealthKitManager: ObservableObject {
     }
 }
 
-enum TimeFrame {
-    case week
-    case month
-    case year
+enum TimeFrame: String, CaseIterable {
+    case week = "Week"
+    case month = "Month"
+    case year = "Year"
 }
 
 struct SwimStats {
