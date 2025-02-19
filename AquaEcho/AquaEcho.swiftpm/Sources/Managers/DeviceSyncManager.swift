@@ -3,6 +3,7 @@ import Combine
 import CoreBluetooth
 import WatchConnectivity
 import HealthKit
+import AVFAudio
 
 class DeviceSyncManager: NSObject, ObservableObject {
     static let shared = DeviceSyncManager()
@@ -58,7 +59,7 @@ class DeviceSyncManager: NSObject, ObservableObject {
     
     private func handleAudioRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reasonValue = userInfo[AVAudioSession.RouteChangeNotification.Keys.reasonKey] as? UInt,
               let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
             return
         }

@@ -6,7 +6,7 @@ struct SecurityConfig {
     // Authentication settings
     static let authConfig = AuthenticationConfiguration(
         biometricAuthEnabled: true,
-        requiredBiometricLevel: .any,
+        requiredBiometricLevel: .faceID, // Changed from .any to .faceID
         fallbackToPasscode: true,
         sessionTimeout: 3600 // 1 hour
     )

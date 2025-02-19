@@ -2,6 +2,7 @@ import Foundation
 import CoreBluetooth
 import WatchConnectivity
 import AVFoundation
+import HealthKit
 
 struct DeviceConfig {
     // Bluetooth configuration
@@ -48,11 +49,18 @@ struct DeviceConfig {
     ]
     
     // HealthKit configuration
-    static let healthKitTypes: Set<HKObjectType> = [
-        HKObjectType.workoutType(),
-        HKObjectType.quantityType(forIdentifier: .heartRate)!,
-        HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
-        HKObjectType.quantityType(forIdentifier: .swimmingStrokeCount)!,
-        HKObjectType.quantityType(forIdentifier: .vo2Max)!
-    ]
+    static let healthKitTypes: Set<HKSampleType> = {
+        var types: Set<HKSampleType> = []
+        if let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate),
+           let distance = HKQuantityType.quantityType(forIdentifier: .distanceSwimming),
+           let strokeCount = HKQuantityType.quantityType(forIdentifier: .swimmingStrokeCount),
+           let vo2Max = HKQuantityType.quantityType(forIdentifier: .vo2Max) {
+            types.insert(heartRate)
+            types.insert(distance)
+            types.insert(strokeCount)
+            types.insert(vo2Max)
+            types.insert(HKWorkoutType.workoutType())
+        }
+        return types
+    }()
 }

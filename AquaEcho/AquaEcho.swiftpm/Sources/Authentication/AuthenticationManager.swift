@@ -5,7 +5,7 @@ import CloudKit
 class AuthenticationManager: NSObject, ObservableObject {
     @Published var isAuthenticated = false
     @Published var userProfile: UserProfile?
-    private let keychain = KeychainManager()
+    private let keychain = KeychainManager.shared
     
     override init() {
         super.init()

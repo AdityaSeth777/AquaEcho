@@ -5,8 +5,10 @@ import Security
 class DataEncryptionManager {
     static let shared = DataEncryptionManager()
     
-    private let keychain = KeychainManager()
+    private let keychain = KeychainManager.shared
     private let securityConfig = SecurityConfig.encryptionConfig
+    
+    private init() {} // Make initializer private for singleton
     
     // MARK: - Encryption
     
