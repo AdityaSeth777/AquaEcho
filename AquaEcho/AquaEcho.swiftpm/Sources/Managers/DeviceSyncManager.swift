@@ -59,7 +59,7 @@ class DeviceSyncManager: NSObject, ObservableObject {
     
     private func handleAudioRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSession.RouteChangeReason.rawValue,
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
               let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
             return
         }
