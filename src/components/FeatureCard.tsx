@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Icon3D } from './three/Icon3D';
