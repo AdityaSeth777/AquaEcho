@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-gray-950">
         <Providers>
           <Navbar />

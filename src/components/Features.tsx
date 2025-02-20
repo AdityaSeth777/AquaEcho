@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
 import { FeatureCard } from './FeatureCard';
 import { ParticleField } from './three/ParticleField';
 
@@ -31,12 +32,13 @@ const features = [
 export function Features() {
   return (
     <section id="features" className="relative min-h-screen py-20 overflow-hidden">
-      <Canvas
-        className="absolute inset-0"
-        camera={{ position: [0, 0, 5], fov: 75 }}
-      >
-        <ParticleField />
-      </Canvas>
+      <div className="absolute inset-0">
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+            <ParticleField />
+          </Canvas>
+        </Suspense>
+      </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <motion.div

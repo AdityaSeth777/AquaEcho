@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text3D } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Icon3DProps {
@@ -24,15 +24,16 @@ export function Icon3D({ icon }: Icon3DProps) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 5]} intensity={1} />
       <mesh ref={mesh}>
-        <Text3D
-          font="/fonts/inter.json"
-          size={1}
-          height={0.2}
-          curveSegments={12}
+        <Text
+          fontSize={1}
+          maxWidth={200}
+          lineHeight={1}
+          letterSpacing={0.02}
+          textAlign="center"
         >
           {icon}
           <meshStandardMaterial color="#60A5FA" />
-        </Text3D>
+        </Text>
       </mesh>
     </>
   );

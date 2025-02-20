@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
 import { Icon3D } from './three/Icon3D';
 
 interface FeatureCardProps {
@@ -23,9 +24,11 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
       className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-colors"
     >
       <div className="h-24 relative mb-6">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <Icon3D icon={feature.icon} />
-        </Canvas>
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+            <Icon3D icon={feature.icon} />
+          </Canvas>
+        </Suspense>
       </div>
       
       <h3 className="text-2xl font-display font-bold text-white mb-4">

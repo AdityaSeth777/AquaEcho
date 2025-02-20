@@ -3,15 +3,14 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        display: ['var(--font-montserrat)'],
+        display: ['var(--font-montserrat)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: {
@@ -50,4 +49,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}
