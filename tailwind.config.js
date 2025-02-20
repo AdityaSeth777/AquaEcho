@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        display: ['var(--font-cabinet-grotesk)'],
+        display: ['var(--font-montserrat)'],
       },
       colors: {
         primary: {
