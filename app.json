@@ -4,10 +4,10 @@
     "slug": "aquaecho",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./images/logo1.jpg",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./images/logo1.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#0066CC"
     },
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./images/logo1.jpg",
         "backgroundColor": "#0066CC"
       },
       "package": "com.aquaecho.app"
