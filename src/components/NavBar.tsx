@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Sparkles, Info, Phone, Shield, FileText, Menu, X } from 'lucide-react';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,11 +25,11 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="#features">Features</NavLink>
-            <NavLink href="#about">About</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
-            <NavLink href="/privacy">Privacy</NavLink>
-            <NavLink href="/terms">Terms</NavLink>
+            <NavLink href="#features" icon={<Sparkles size={18} />}>Features</NavLink>
+            <NavLink href="#about" icon={<Info size={18} />}>About</NavLink>
+            <NavLink href="#contact" icon={<Phone size={18} />}>Contact</NavLink>
+            <NavLink href="/privacy" icon={<Shield size={18} />}>Privacy</NavLink>
+            <NavLink href="/terms" icon={<FileText size={18} />}>Terms</NavLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -37,28 +38,7 @@ export function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
@@ -66,19 +46,19 @@ export function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
-              <MobileNavLink href="#features" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="#features" icon={<Sparkles size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Features
               </MobileNavLink>
-              <MobileNavLink href="#about" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="#about" icon={<Info size={18} />} onClick={() => setIsMenuOpen(false)}>
                 About
               </MobileNavLink>
-              <MobileNavLink href="#contact" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="#contact" icon={<Phone size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Contact
               </MobileNavLink>
-              <MobileNavLink href="/privacy" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="/privacy" icon={<Shield size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Privacy
               </MobileNavLink>
-              <MobileNavLink href="/terms" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="/terms" icon={<FileText size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Terms
               </MobileNavLink>
             </div>
@@ -89,23 +69,26 @@ export function Navbar() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, icon, children }: { href: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+      className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
     >
-      {children}
+      {icon}
+      <span>{children}</span>
     </Link>
   );
 }
 
 function MobileNavLink({
   href,
+  icon,
   onClick,
   children,
 }: {
   href: string;
+  icon: React.ReactNode;
   onClick: () => void;
   children: React.ReactNode;
 }) {
@@ -113,9 +96,10 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="block text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+      className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
     >
-      {children}
+      {icon}
+      <span>{children}</span>
     </Link>
   );
 }

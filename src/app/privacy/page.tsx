@@ -72,10 +72,10 @@ export default function PrivacyPolicy() {
                 If you have any questions about our privacy policy, please contact us at:
                 <br />
                 <a
-                  href="mailto:privacy@aquaecho.com"
+                  href="mailto:contact@adityaseth.in"
                   className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
-                  privacy@aquaecho.com
+                  contact@adityaseth.in
                 </a>
               </p>
             </Section>

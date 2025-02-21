@@ -83,10 +83,10 @@ export default function TermsOfService() {
                 Questions about the Terms of Service should be sent to us at:
                 <br />
                 <a
-                  href="mailto:legal@aquaecho.com"
+                  href="mailto:contact@adityaseth.in"
                   className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
-                  legal@aquaecho.com
+                  contact@adityaseth.in
                 </a>
               </p>
             </Section>
