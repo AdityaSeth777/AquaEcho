@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { SwimmingModel } from './three/SwimmingModel';
+import { SwimmingAnimation } from './three/SwimmingAnimation';
 
 export function About() {
   return (
-    <section id="about" className="relative min-h-screen py-20 bg-gradient-to-b from-primary-950 to-primary-900">
+    <section id="about" className="relative py-20 bg-gradient-to-b from-primary-950 to-primary-900">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -46,8 +46,8 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="h-[600px] relative"
           >
-            <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-              <SwimmingModel />
+            <Canvas camera={{ position: [0, 2, 5], fov: 75 }}>
+              <SwimmingAnimation />
             </Canvas>
           </motion.div>
         </div>

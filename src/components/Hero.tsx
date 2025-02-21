@@ -4,7 +4,7 @@ import { WaterScene } from './three/WaterScene';
 
 export function Hero() {
   return (
-    <div className="relative h-screen">
+    <section className="relative h-screen flex items-center justify-center">
       <Canvas
         className="absolute inset-0"
         camera={{ position: [0, 0, 5], fov: 75 }}
@@ -12,40 +12,38 @@ export function Hero() {
         <WaterScene />
       </Canvas>
       
-      <div className="relative z-10 flex items-center justify-center h-full">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
-          >
+      <div className="relative z-10 container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6 drop-shadow-lg">
             Smart Swimming Assistant
-          </motion.h1>
+          </h1>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-white/90 mb-8"
-          >
+          <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow">
             Real-time guidance and tracking for visually impaired and competitive swimmers
-          </motion.p>
+          </p>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <a
               href="#features"
-              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors"
             >
-              Discover More
+              <span className="text-lg font-semibold">Discover More</span>
+              <svg className="w-6 h-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
             </a>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

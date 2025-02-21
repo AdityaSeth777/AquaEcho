@@ -1,46 +1,37 @@
-'use client';
-
 import { motion } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
 import { FeatureCard } from './FeatureCard';
-import { ParticleField } from './three/ParticleField';
 
 const features = [
   {
     title: 'Lane Guidance',
-    description: 'Real-time audio feedback keeps you centered in your lane',
+    description: 'Real-time audio feedback keeps you centered in your lane with precision accuracy',
     icon: 'navigation',
+    color: '#60A5FA'
   },
   {
     title: 'Performance Tracking',
-    description: 'Monitor your progress with detailed analytics and insights',
+    description: 'Monitor your progress with detailed analytics and comprehensive insights',
     icon: 'chart',
+    color: '#34D399'
   },
   {
     title: 'Accessibility',
-    description: 'Designed for swimmers of all abilities with intuitive feedback',
+    description: 'Designed for swimmers of all abilities with intuitive haptic and audio feedback',
     icon: 'accessibility',
+    color: '#F472B6'
   },
   {
     title: 'Smart Analytics',
-    description: 'Advanced metrics and performance analysis for improvement',
+    description: 'Advanced metrics and AI-powered performance analysis for continuous improvement',
     icon: 'graph',
+    color: '#A78BFA'
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="relative min-h-screen py-20 overflow-hidden">
-      <div className="absolute inset-0">
-        <Suspense fallback={null}>
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-            <ParticleField />
-          </Canvas>
-        </Suspense>
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4">
+    <section id="features" className="relative py-20 bg-gradient-to-b from-primary-900 to-primary-950">
+      <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +47,7 @@ export function Features() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}
