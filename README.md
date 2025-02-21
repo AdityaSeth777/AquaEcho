@@ -1,6 +1,6 @@
 # AquaEcho - Smart Swimming Assistant
 
-![](./images/logo4.jpg)
+![](./public/images/main.jpg)
 
 AquaEcho is a revolutionary iOS application designed to assist visually impaired and competitive swimmers with real-time lane guidance using haptic feedback and spatial audio cues.
 
@@ -117,6 +117,11 @@ AquaEcho/
   ```
 
 ### API Documentation
+
+Try out the API endpoints:
+1. Visit `/api` in your browser
+2. Use the interactive Swagger UI to explore endpoints
+3. Test API calls directly from the documentation
 
 #### Base URL
 ```
