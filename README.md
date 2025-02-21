@@ -84,6 +84,8 @@ AquaEcho/
 └── Package.swift
 ```
 
+![](./public/images/homepage.png )
+
 ### Device Integration
 
 #### Apple Watch Integration
@@ -123,9 +125,11 @@ Try out the API endpoints:
 2. Use the interactive Swagger UI to explore endpoints
 3. Test API calls directly from the documentation
 
+![](./public/images/backend.png)
+
 #### Base URL
 ```
-https://api.aquaecho.com/v1
+http://localhost:3000/api
 ```
 
 #### Authentication
