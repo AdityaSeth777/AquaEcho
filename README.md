@@ -118,6 +118,11 @@ AquaEcho/
 
 ### API Documentation
 
+Try out the API endpoints:
+1. Visit `/api` in your browser
+2. Use the interactive Swagger UI to explore endpoints
+3. Test API calls directly from the documentation
+
 #### Base URL
 ```
 https://api.aquaecho.com/v1
