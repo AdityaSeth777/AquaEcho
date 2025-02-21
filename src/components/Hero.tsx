@@ -4,7 +4,7 @@ import { WaterScene } from './three/WaterScene';
 
 export function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center">
+    <section className="relative h-screen overflow-hidden">
       <Canvas
         className="absolute inset-0"
         camera={{ position: [0, 0, 5], fov: 75 }}
@@ -12,38 +12,47 @@ export function Hero() {
         <WaterScene />
       </Canvas>
       
-      <div className="relative z-10 container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6 drop-shadow-lg">
-            Smart Swimming Assistant
-          </h1>
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="absolute top-[20%] left-0 right-0 z-10"
+      >
+        <div className="container mx-auto px-4">
+          <motion.h1 
+            className="group text-8xl md:text-[12rem] font-display font-black text-center leading-none"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="relative block overflow-hidden p-2">
+              <motion.span
+                className="block text-white/90 cursor-pointer hover:text-white transition-colors duration-500"
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Aqua
+              </motion.span>
+            </span>
+            <span className="relative block overflow-hidden p-2">
+              <motion.span
+                className="block bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text cursor-pointer"
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Echo
+              </motion.span>
+            </span>
+          </motion.h1>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow">
-            Real-time guidance and tracking for visually impaired and competitive swimmers
-          </p>
-          
-          <motion.div
+          <motion.p 
+            className="text-2xl md:text-3xl text-center text-white/80 mt-8 max-w-3xl mx-auto font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <a
-              href="#features"
-              className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors"
-            >
-              <span className="text-lg font-semibold">Discover More</span>
-              <svg className="w-6 h-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </a>
-          </motion.div>
-        </motion.div>
-      </div>
+            Real-time guidance and tracking for visually impaired and competitive swimmers
+          </motion.p>
+        </div>
+      </motion.div>
     </section>
   );
 }

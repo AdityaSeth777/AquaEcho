@@ -1,62 +1,66 @@
 import { motion } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { Float, Center, Sphere, Box } from '@react-three/drei';
+import { DivideIcon as LucideIcon } from 'lucide-react';
 
 interface FeatureCardProps {
   feature: {
     title: string;
     description: string;
-    icon: string;
-    color: string;
+    icon: LucideIcon;
+    gradient: string[];
   };
   index: number;
 }
 
-function Icon3D({ color }: { color: string }) {
-  return (
-    <Float
-      speed={4}
-      rotationIntensity={1}
-      floatIntensity={2}
-    >
-      <Center>
-        <group>
-          <Box args={[0.8, 0.8, 0.8]} position={[0, 0, 0]}>
-            <meshStandardMaterial color={color} />
-          </Box>
-          <Sphere args={[0.3, 16, 16]} position={[0.4, 0.4, 0]}>
-            <meshStandardMaterial color={color} />
-          </Sphere>
-        </group>
-      </Center>
-    </Float>
-  );
-}
-
 export function FeatureCard({ feature, index }: FeatureCardProps) {
+  const Icon = feature.icon;
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-all hover:transform hover:scale-105"
+      whileHover={{ scale: 1.05 }}
+      className="group relative bg-white/5 backdrop-blur-xl rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 overflow-hidden"
     >
-      <div className="h-32 relative mb-6">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
-          <Icon3D color={feature.color} />
-        </Canvas>
+      {/* Surprise Gradient Border on Hover */}
+      <div
+        className="absolute inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `linear-gradient(135deg, ${feature.gradient[0]}, ${feature.gradient[1]})`,
+          filter: 'blur(8px)',
+          zIndex: -1
+        }}
+      />
+      
+      {/* Icon Container */}
+      <div className="relative mb-6 group-hover:scale-110 transition-transform duration-500">
+        <motion.div
+          initial={{ rotate: 0 }}
+          whileHover={{ rotate: 360 }}
+          transition={{ duration: 0.8, type: "spring" }}
+          className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center"
+        >
+          <Icon 
+            size={32}
+            className="text-white transition-colors duration-500"
+          />
+        </motion.div>
       </div>
       
       <h3 className="text-2xl font-display font-bold text-white mb-4">
         {feature.title}
       </h3>
       
-      <p className="text-white/80">
+      <p className="text-white/80 group-hover:text-white/90 transition-colors duration-500">
         {feature.description}
       </p>
+      
+      {/* Hover Effect Corner */}
+      <div className="absolute -bottom-1 -right-1 w-16 h-16 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform rotate-45"
+           style={{
+             background: `linear-gradient(135deg, ${feature.gradient[0]}, ${feature.gradient[1]})`
+           }} />
     </motion.div>
   );
 }
