@@ -4,7 +4,12 @@ import { WaterScene } from './three/WaterScene';
 
 export function Hero() {
   return (
-    <section className="relative h-screen overflow-hidden">
+    <motion.section 
+      className="relative h-screen overflow-hidden"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+    >
       <Canvas
         className="absolute inset-0"
         camera={{ position: [0, 0, 5], fov: 75 }}
@@ -53,6 +58,6 @@ export function Hero() {
           </motion.p>
         </div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 }

@@ -2,6 +2,8 @@ import { Inter, Montserrat } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Providers } from '@/components/Providers';
+import { Preloader } from '@/components/Preloader';
+import { CustomCursor } from '@/components/CustomCursor';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -17,6 +19,9 @@ const montserrat = Montserrat({
 export const metadata = {
   title: 'AquaEcho - Smart Swimming Assistant',
   description: 'Real-time guidance and tracking for visually impaired and competitive swimmers',
+  icons: {
+    icon: '/images/favicon.ico',
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +33,8 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-gray-950">
         <Providers>
+          <Preloader />
+          <CustomCursor />
           <Navbar />
           <main>{children}</main>
           <Footer />

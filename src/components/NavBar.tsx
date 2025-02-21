@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,13 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/images/main.jpg"
+              alt="AquaEcho Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
             <span className="text-2xl font-display font-bold text-primary-600">AquaEcho</span>
           </Link>
 
@@ -19,6 +27,8 @@ export function Navbar() {
             <NavLink href="#features">Features</NavLink>
             <NavLink href="#about">About</NavLink>
             <NavLink href="#contact">Contact</NavLink>
+            <NavLink href="/privacy">Privacy</NavLink>
+            <NavLink href="/terms">Terms</NavLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -64,6 +74,12 @@ export function Navbar() {
               </MobileNavLink>
               <MobileNavLink href="#contact" onClick={() => setIsMenuOpen(false)}>
                 Contact
+              </MobileNavLink>
+              <MobileNavLink href="/privacy" onClick={() => setIsMenuOpen(false)}>
+                Privacy
+              </MobileNavLink>
+              <MobileNavLink href="/terms" onClick={() => setIsMenuOpen(false)}>
+                Terms
               </MobileNavLink>
             </div>
           </div>
