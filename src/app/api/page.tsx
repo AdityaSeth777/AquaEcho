@@ -1,7 +1,12 @@
 import dynamic from 'next/dynamic';
 import 'swagger-ui-react/swagger-ui.css';
+import type { SwaggerUIProps } from 'swagger-ui-react';
 
-const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false });
+const SwaggerUI = dynamic<SwaggerUIProps>(
+  () => import('swagger-ui-react').then(mod => mod.default),
+  { ssr: false }
+);
+
 
 const apiSpec = {
   openapi: '3.0.0',
