@@ -27,7 +27,7 @@ export function WaterScene() {
   useFrame((state) => {
     const { clock } = state;
     if (meshRef.current) {
-      meshRef.current.material.uniforms.uTime.value = clock.getElapsedTime();
+      (meshRef.current.material as THREE.ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
     }
   });
 

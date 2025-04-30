@@ -1,8 +1,8 @@
 import { Inter, Montserrat } from 'next/font/google';
-import { Navbar } from '@/components/Navbar';
+import { Navbar } from '@/components/NavBar';
 import { Footer } from '@/components/Footer';
 import { Providers } from '@/components/Providers';
-import { Preloader } from '@/components/Preloader';
+import { Preloader } from '@/components/PreLoader';
 import { CustomCursor } from '@/components/CustomCursor';
 import '@/styles/globals.css';
 
