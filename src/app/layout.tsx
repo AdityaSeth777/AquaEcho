@@ -5,6 +5,7 @@ import { Providers } from '@/components/Providers';
 import { Preloader } from '@/components/PreLoader';
 import { CustomCursor } from '@/components/CustomCursor';
 import '@/styles/globals.css';
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ 
   subsets: ['latin'],
