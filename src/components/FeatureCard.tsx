@@ -5,7 +5,7 @@ interface FeatureCardProps {
   feature: {
     title: string;
     description: string;
-    icon: LucideIcon;
+    icon: typeof LucideIcon;
     gradient: string[];
   };
   index: number;

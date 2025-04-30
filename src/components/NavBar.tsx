@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Info, Phone, Shield, FileText, Menu, X } from 'lucide-react';
+import { Sparkles, Info, Phone, Shield, FileText, Menu, X, Code2 } from 'lucide-react';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,6 +28,9 @@ export function Navbar() {
             <NavLink href="#features" icon={<Sparkles size={18} />}>Features</NavLink>
             <NavLink href="#about" icon={<Info size={18} />}>About</NavLink>
             <NavLink href="#contact" icon={<Phone size={18} />}>Contact</NavLink>
+            <NavLink href="https://github.com/AdityaSeth777/AquaEcho" icon={<Code2 size={18} />} target="_blank">
+              Product
+            </NavLink>
             <NavLink href="/privacy" icon={<Shield size={18} />}>Privacy</NavLink>
             <NavLink href="/terms" icon={<FileText size={18} />}>Terms</NavLink>
           </div>
@@ -46,6 +49,9 @@ export function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
+              <MobileNavLink href="https://github.com/yourusername/yourrepo" icon={<Code2 size={18} />} onClick={() => setIsMenuOpen(false)} target="_blank">
+                Product
+              </MobileNavLink>
               <MobileNavLink href="#features" icon={<Sparkles size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Features
               </MobileNavLink>
@@ -69,10 +75,22 @@ export function Navbar() {
   );
 }
 
-function NavLink({ href, icon, children }: { href: string; icon: React.ReactNode; children: React.ReactNode }) {
+// Desktop link
+function NavLink({
+  href,
+  icon,
+  children,
+  target,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+  target?: string;
+}) {
   return (
     <Link
       href={href}
+      target={target}
       className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
     >
       {icon}
@@ -81,20 +99,24 @@ function NavLink({ href, icon, children }: { href: string; icon: React.ReactNode
   );
 }
 
+// Mobile link
 function MobileNavLink({
   href,
   icon,
   onClick,
   children,
+  target,
 }: {
   href: string;
   icon: React.ReactNode;
   onClick: () => void;
   children: React.ReactNode;
+  target?: string;
 }) {
   return (
     <Link
       href={href}
+      target={target}
       onClick={onClick}
       className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
     >
