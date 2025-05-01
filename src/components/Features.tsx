@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { FeatureCard } from './FeatureCard';
 import { Navigation, LineChart, Accessibility, BarChart } from 'lucide-react';

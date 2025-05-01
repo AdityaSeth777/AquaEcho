@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Info, Phone, Shield, FileText, Menu, X, Code2 } from 'lucide-react';
+// Updated import to include Sun and Moon icons.
+import { Sparkles, Info, Phone, Shield, FileText, Menu, X, Code2, Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg dark:bg-gray-950/80">
@@ -33,6 +36,17 @@ export function Navbar() {
             </NavLink>
             <NavLink href="/privacy" icon={<Shield size={18} />}>Privacy</NavLink>
             <NavLink href="/terms" icon={<FileText size={18} />}>Terms</NavLink>
+          </div>
+
+          {/* Theme Toggle Button for Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            <button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              className="flex items-center text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+            >
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              <span className="ml-2">Toggle Theme</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,6 +81,17 @@ export function Navbar() {
               <MobileNavLink href="/terms" icon={<FileText size={18} />} onClick={() => setIsMenuOpen(false)}>
                 Terms
               </MobileNavLink>
+              {/* Updated Theme Toggle Button for Mobile */}
+              <button
+                onClick={() => {
+                  setTheme(theme === 'light' ? 'dark' : 'light');
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+              >
+                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                <span className="ml-2">Toggle Theme</span>
+              </button>
             </div>
           </div>
         )}
