@@ -2,7 +2,17 @@
 
 ![](./public/images/main.jpg)
 
-AquaEcho is a revolutionary iOS application designed to assist visually impaired and competitive swimmers with real-time lane guidance using haptic feedback and spatial audio cues.
+### AquaEcho is a revolutionary iOS application designed to assist visually impaired and competitive swimmers with real-time lane guidance using haptic feedback and spatial audio cues.
+
+#### If the website doesn't work on Chrome or Chromium based browsers, make sure that the "Use hardware acceleration when available" option is turned on.
+
+If not, then :
+1. Go to your chrome://settings/
+2. Click on System, on the left side panel
+3. Turn on "Use hardware acceleration when available"
+4. Click "Relaunch"
+
+### Good luck!
 
 ## 🌟 Key Features
 
