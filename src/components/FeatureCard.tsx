@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { DivideIcon as LucideIcon } from 'lucide-react';
 
