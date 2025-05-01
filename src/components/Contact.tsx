@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { WaveForm } from './three/WaveForm';
 
 export function Contact() {
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
   return (
     <section id="contact" className="relative min-h-screen py-20 bg-primary-950">
       <Canvas
@@ -35,7 +38,33 @@ export function Contact() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl p-8"
         >
-          <form className="space-y-6">
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const data = new FormData(form);
+
+              try {
+                const res = await fetch('https://formspree.io/f/xqaqevbj', {
+                  method: 'POST',
+                  body: data,
+                  headers: {
+                    Accept: 'application/json',
+                  },
+                });
+
+                if (res.ok) {
+                  setStatus('success');
+                  form.reset();
+                } else {
+                  setStatus('error');
+                }
+              } catch {
+                setStatus('error');
+              }
+            }}
+            className="space-y-6"
+          >
             <div>
               <label htmlFor="name" className="block text-white mb-2">
                 Name
@@ -43,6 +72,7 @@ export function Contact() {
               <input
                 type="text"
                 id="name"
+                name="name"
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-primary-400"
                 placeholder="Your name"
               />
@@ -55,6 +85,7 @@ export function Contact() {
               <input
                 type="email"
                 id="email"
+                name="email"
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-primary-400"
                 placeholder="your@email.com"
               />
@@ -66,11 +97,23 @@ export function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 rows={4}
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-primary-400"
                 placeholder="Your message"
               />
             </div>
+
+            {status === 'success' && (
+              <p className="text-green-400 font-medium">
+                Thanks! Your message has been sent.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="text-red-400 font-medium">
+                Oops! Something went wrong. Please try again.
+              </p>
+            )}
 
             <button
               type="submit"
