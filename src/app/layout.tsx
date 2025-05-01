@@ -1,7 +1,8 @@
+
 import { Inter, Montserrat } from 'next/font/google';
 import { Navbar } from '@/components/NavBar';
 import { Footer } from '@/components/Footer';
-import { Providers } from '@/components/Providers';
+import Providers from '@/components/Providers';
 import { Preloader } from '@/components/PreLoader';
 import { CustomCursor } from '@/components/CustomCursor';
 import '@/styles/globals.css';
@@ -32,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-gray-950">
         <Providers>
           <Preloader />

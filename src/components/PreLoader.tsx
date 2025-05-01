@@ -26,6 +26,7 @@ export function Preloader() {
           className="w-24 h-24"
           viewBox="0 0 100 100"
           xmlns="http://www.w3.org/2000/svg"
+          suppressHydrationWarning
         >
           {/* Water Drop */}
           <motion.path

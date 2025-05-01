@@ -1,3 +1,5 @@
+'use client';
+
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import { WaterScene } from './three/WaterScene';
@@ -30,7 +32,7 @@ export function Hero() {
           >
             <span className="relative block overflow-hidden p-2">
               <motion.span
-                className="block text-white/90 cursor-pointer hover:text-white transition-colors duration-500"
+                className="block text-blue-900 dark:text-white/90 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-500"
                 whileHover={{ y: -10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
